@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #000000;
+    color: #f3f4f6;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Gemini Dynamic Mesh Background */
+@keyframes mesh-movement {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.gemini-mesh-bg {
+  background: radial-gradient(circle at 15% 50%, rgba(66, 133, 244, 0.15), transparent 50%),
+              radial-gradient(circle at 85% 30%, rgba(217, 101, 112, 0.15), transparent 50%),
+              radial-gradient(circle at 50% 80%, rgba(161, 66, 244, 0.15), transparent 50%);
+  background-size: 200% 200%;
+  animation: mesh-movement 15s ease-in-out infinite;
+}
+
+/* Authentic One UI 7 Focus Blocks */
+.one-ui-card {
+  background: #17181c; /* Solid, high-contrast dark gray */
+  border-radius: 32px; /* Massive One UI rounding */
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05), 0 4px 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.one-ui-card:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* Gemini Active Glow */
+.gemini-glow-text {
+  background: linear-gradient(90deg, #4285f4, #9b72cb, #d96570, #4285f4);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: mesh-movement 6s linear infinite;
+}

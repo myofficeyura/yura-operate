@@ -1,0 +1,649 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NEXUS | Next-Gen Phone Shop</title>
+  <style>
+    /* --- CSS RESET & VARIABLES --- */
+    :root {
+      --bg-main: #0b0f17;
+      --bg-card: #151c28;
+      --bg-card-hover: #1e2738;
+      --accent-blue: #3b82f6;
+      --accent-hover: #2563eb;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border-color: #263346;
+      --radius: 12px;
+      --transition: all 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* --- HEADER & NAVBAR --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(11, 15, 23, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      color: var(--accent-blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .cart-btn {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .cart-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-blue);
+    }
+
+    .cart-badge {
+      background-color: var(--accent-blue);
+      color: white;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(21, 28, 40, 0.6) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .hero-img img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    }
+
+    /* --- CONTROLS SECTION (Search & Filter) --- */
+    .controls {
+      max-width: 1200px;
+      margin: 2rem auto 1rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent-blue);
+      color: #fff;
+      border-color: var(--accent-blue);
+    }
+
+    .search-box input {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      outline: none;
+      width: 250px;
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    /* --- PRODUCTS GRID --- */
+    .products-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-blue);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .product-specs {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .product-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .product-price {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .add-cart-btn {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .add-cart-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    /* --- MODAL / CART DRAWER --- */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: flex-end;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .cart-drawer {
+      background: var(--bg-card);
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg-main);
+      padding: 0.8rem;
+      border-radius: 8px;
+    }
+
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .cart-item-price {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .remove-item-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .cart-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .checkout-btn:hover {
+      background: #059669;
+    }
+
+    /* --- RESPONSIVE MEDIA QUERIES --- */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="navbar">
+      <div class="logo">📱 NEXUS<span>SHOP</span></div>
+      <div class="nav-actions">
+        <button class="cart-btn" id="cartBtn">
+          🛒 Cart <span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Upgrade to Next-Gen Performance.</h1>
+      <p>Discover the latest flagship smartphones with unbeatable performance, camera quality, and battery life.</p>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=600&q=80" alt="Flagship Phone" />
+    </div>
+  </section>
+
+  <!-- CONTROLS SECTION -->
+  <section class="controls">
+    <div class="filters">
+      <button class="filter-btn active" data-brand="all">All Phones</button>
+      <button class="filter-btn" data-brand="Apple">Apple</button>
+      <button class="filter-btn" data-brand="Samsung">Samsung</button>
+      <button class="filter-btn" data-brand="Google">Google</button>
+      <button class="filter-btn" data-brand="Xiaomi">Xiaomi</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search phones..." />
+    </div>
+  </section>
+
+  <!-- PRODUCT DISPLAY GRID -->
+  <section class="products-section">
+    <div class="product-grid" id="productGrid">
+      <!-- Dynamically Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- CART MODAL -->
+  <div class="modal-overlay" id="cartModal">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h2>Your Shopping Cart</h2>
+        <button class="close-btn" id="closeCartBtn">&times;</button>
+      </div>
+      <div class="cart-items" id="cartItemsContainer">
+        <!-- Dynamically rendered cart items -->
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cartTotal">$0</span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // 1. DATA ARRAY (Product Database)
+    const products = [
+      {
+        id: 1,
+        name: "iPhone 15 Pro",
+        brand: "Apple",
+        price: 999,
+        specs: "A17 Pro Chip • 128GB • 48MP Camera",
+        image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 2,
+        name: "Samsung Galaxy S24 Ultra",
+        brand: "Samsung",
+        price: 1199,
+        specs: "Snapdragon 8 Gen 3 • 256GB • 200MP",
+        image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 3,
+        name: "Google Pixel 8 Pro",
+        brand: "Google",
+        price: 899,
+        specs: "Google Tensor G3 • 128GB • AI Camera",
+        image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 4,
+        name: "Xiaomi 13 Ultra",
+        brand: "Xiaomi",
+        price: 799,
+        specs: "Leica Quad Camera • 512GB • 120Hz",
+        image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 5,
+        name: "iPhone 14",
+        brand: "Apple",
+        price: 699,
+        specs: "A15 Bionic • 128GB • Dual Camera",
+        image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        id: 6,
+        name: "Samsung Galaxy Z Flip 5",
+        brand: "Samsung",
+        price: 999,
+        specs: "Foldable AMOLED • 256GB • Compact",
+        image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?auto=format&fit=crop&w=500&q=80"
+      }
+    ];
+
+    // State
+    let cart = [];
+    let currentBrand = "all";
+    let searchQuery = "";
+
+    // DOM Elements
+    const productGrid = document.getElementById("productGrid");
+    const cartBtn = document.getElementById("cartBtn");
+    const closeCartBtn = document.getElementById("closeCartBtn");
+    const cartModal = document.getElementById("cartModal");
+    const cartItemsContainer = document.getElementById("cartItemsContainer");
+    const cartCount = document.getElementById("cartCount");
+    const cartTotal = document.getElementById("cartTotal");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const searchInput = document.getElementById("searchInput");
+
+    // RENDER PRODUCTS
+    function renderProducts() {
+      productGrid.innerHTML = "";
+      
+      const filtered = products.filter(product => {
+        const matchesBrand = currentBrand === "all" || product.brand === currentBrand;
+        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesBrand && matchesSearch;
+      });
+
+      if(filtered.length === 0) {
+        productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">No smartphones found matching your query.</p>`;
+        return;
+      }
+
+      filtered.forEach(product => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="product-image" />
+          <div>
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-specs">${product.specs}</p>
+          </div>
+          <div class="product-bottom">
+            <span class="product-price">$${product.price}</span>
+            <button class="add-cart-btn" onclick="addToCart(${product.id})">Add to Cart</button>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
+
+    // ADD TO CART LOGIC
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      cart.push(product);
+      updateCartUI();
+    }
+
+    // REMOVE FROM CART
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    // UPDATE CART INTERFACE
+    function updateCartUI() {
+      // Counter
+      cartCount.textContent = cart.length;
+
+      // Container
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `<p style="text-align: center; color: var(--text-muted); margin-top: 2rem;">Your cart is empty.</p>`;
+      } else {
+        cart.forEach((item, index) => {
+          total += item.price;
+          const cartItem = document.createElement("div");
+          cartItem.className = "cart-item";
+          cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-details">
+              <div class="cart-item-title">${item.name}</div>
+              <div class="cart-item-price">$${item.price}</div>
+            </div>
+            <button class="remove-item-btn" onclick="removeFromCart(${index})">Remove</button>
+          `;
+          cartItemsContainer.appendChild(cartItem);
+        });
+      }
+
+      cartTotal.textContent = `$${total}`;
+    }
+
+    // CHECKOUT FUNCTION
+    function checkout() {
+      if(cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      alert(`Thank you for your order! Total payment: ${cartTotal.textContent}`);
+      cart = [];
+      updateCartUI();
+      cartModal.classList.remove("active");
+    }
+
+    // EVENT LISTENERS
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        e.target.classList.add("active");
+        currentBrand = e.target.dataset.brand;
+        renderProducts();
+      });
+    });
+
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value;
+      renderProducts();
+    });
+
+    cartBtn.addEventListener("click", () => cartModal.classList.add("active"));
+    closeCartBtn.addEventListener("click", () => cartModal.classList.remove("active"));
+
+    // INITIAL RENDER
+    renderProducts();
+  </script>
+</body>
+</html>

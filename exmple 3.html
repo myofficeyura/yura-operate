@@ -1,0 +1,438 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasta Artigianale | Authentic Italian Pasta</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS STYLES & VARIABLES --- */
+        :root {
+            --primary: #8B0000; /* Deep Italian Red */
+            --secondary: #2D5A27; /* Olive Green */
+            --accent: #E8A838; /* Warm Warm Semolina Gold */
+            --bg-light: #FDFBF7; /* Off-white Parchment */
+            --text-dark: #2C2C2C;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cart-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .btn-cta {
+            background-color: var(--accent);
+            color: var(--text-dark);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            background-color: #d4952b;
+        }
+
+        /* --- PRODUCTS SECTION --- */
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin: 3rem 0 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .product-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .add-to-cart {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about {
+            max-width: 1000px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--text-dark);
+            color: #ccc;
+            text-align: center;
+            padding: 3rem 1rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        footer h3 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-info {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Toast notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--secondary);
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            bottom: 30px;
+            right: 30px;
+            font-size: 14px;
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav>
+            <a href="#" class="logo">🍝 Pasta Artigianale</a>
+            <ul class="nav-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">Our Story</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cart-btn" onclick="openCartAlert()">
+                🛒 Cart (<span id="cart-count">0</span>)
+            </button>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Handmade Italian Pasta</h1>
+        <p>Crafted fresh daily in Bologna using 100% organic durum wheat semolina and free-range eggs.</p>
+        <a href="#menu" class="btn-cta">Explore Fresh Menu</a>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu">
+        <h2 class="section-title">Fresh Daily Selection</h2>
+        <p class="section-subtitle">Shipped fresh across Italy and Europe</p>
+
+        <div class="product-grid">
+            <!-- Item 1 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1621996346565-e3d5d6281318?auto=format&fit=crop&w=600&q=80" alt="Fresh Tagliatelle">
+                <div class="card-body">
+                    <h3 class="card-title">Fresh Tagliatelle</h3>
+                    <p class="card-desc">Traditional egg ribbon pasta, perfectly paired with authentic Bolognese ragù.</p>
+                    <div class="card-footer">
+                        <span class="price">€4.50 / 500g</span>
+                        <button class="add-to-cart" onclick="addToCart('Fresh Tagliatelle')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1587740896339-96a76170508d?auto=format&fit=crop&w=600&q=80" alt="Ravioli Ricotta">
+                <div class="card-body">
+                    <h3 class="card-title">Ravioli Ricotta e Spinaci</h3>
+                    <p class="card-desc">Hand-stuffed pasta pockets filled with fresh sheep's milk ricotta and spinach.</p>
+                    <div class="card-footer">
+                        <span class="price">€6.80 / 500g</span>
+                        <button class="add-to-cart" onclick="addToCart('Ravioli Ricotta')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=600&q=80" alt="Trofie Liguri">
+                <div class="card-body">
+                    <h3 class="card-title">Trofie Liguri</h3>
+                    <p class="card-desc">Twisted short pasta made without eggs, best enjoyed with fresh basil pesto.</p>
+                    <div class="card-footer">
+                        <span class="price">€3.90 / 500g</span>
+                        <button class="add-to-cart" onclick="addToCart('Trofie Liguri')">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about">
+        <div class="about-text">
+            <h2>Authentic Italian Tradition</h2>
+            <p>At <strong>Pasta Artigianale</strong>, we honor three generations of Italian culinary heritage. Every single batch is extruded through traditional bronze dies, giving our pasta a coarse, porous texture that holds sauces perfectly.</p>
+            <br>
+            <p>No preservatives, no additives—just pure passion, fresh spring water, and high-protein durum wheat.</p>
+        </div>
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80" alt="Making Pasta">
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <h3>Pasta Artigianale S.r.l.</h3>
+        <div class="footer-info">
+            <p>📍 Via del Pratello 42, 40122 Bologna, Italy</p>
+            <p>📞 +39 051 1234567 | ✉️ orders@pastaartigianale.it</p>
+            <p>⏰ Open Tue - Sun: 08:30 - 19:30</p>
+        </div>
+        <p>&copy; 2024 Pasta Artigianale. Built with care.</p>
+    </footer>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast">Added to cart!</div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        let cartCount = 0;
+
+        function addToCart(itemName) {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            showToast(`${itemName} added to your cart!`);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(function(){ 
+                toast.className = toast.className.replace("show", ""); 
+            }, 3000);
+        }
+
+        function openCartAlert() {
+            if(cartCount === 0) {
+                alert("Your cart is currently empty. Add some fresh pasta first!");
+            } else {
+                alert(`You have ${cartCount} item(s) in your cart. Proceeding to checkout...`);
+            }
+        }
+    </script>
+</body>
+</html>
