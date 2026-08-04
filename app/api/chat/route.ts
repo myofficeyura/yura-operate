@@ -5,12 +5,14 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export async function POST(req: Request) {
   try {
-    // NEW: We now accept an array of 'messages' instead of a single 'prompt'
     const { messages, fileData, fileMimeType } = await req.json();
 
     if (!messages || messages.length === 0) {
       return NextResponse.json({ error: 'Messages are required' }, { status: 400 });
     }
+
+    // NEW: We slice the array here so we only send the last 6 messages to save your quota!
+    const recentMessages = messages.slice(-6);
 
     // Yura's Persona
     const yuraPersona = `You are Yura, an AI created as an Azerbaijani project by a 2nd-year bachelor's degree student named Yusif (everyone calls him Yura, so he named you after himself). 
@@ -21,8 +23,8 @@ export async function POST(req: Request) {
     - You help the user with their tasks efficiently.
     - You act kind, with empathy, and are the user's best friend.`;
 
-    // Map our frontend message history into the format Google Gemini expects
-    const geminiContents = messages.map((msg: any) => ({
+    // Map our sliced frontend message history into the format Google Gemini expects
+    const geminiContents = recentMessages.map((msg: any) => ({
       role: msg.role === 'yura' ? 'model' : 'user',
       parts: [{ text: msg.content }]
     }));
@@ -36,7 +38,7 @@ export async function POST(req: Request) {
 
     const response = await ai.models.generateContent({
       model: 'gemini-flash-latest', 
-      contents: geminiContents, // Sending the full history!
+      contents: geminiContents, // Now only sending the last 6 messages instead of the full history
       config: {
         systemInstruction: yuraPersona,
       }
