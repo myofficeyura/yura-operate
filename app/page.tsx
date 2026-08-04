@@ -259,7 +259,7 @@ export default function Home() {
               
               {authMode === 'select' && (
                 <div className="space-y-4">
-                  <button onClick={handleGoogleLogin} className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium text-sm flex items-center justify-center gap-3 transition-colors shadow-md"><Cloud className="h-5 w-5" /> Continue with Cloud</button>
+                  <button onClick={handleGoogleLogin} className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium text-sm flex items-center justify-center gap-3 transition-colors shadow-md"><LogIn className="h-5 w-5" /> Sign in with Google</button>
                   <div className="relative flex items-center py-2"><div className="flex-grow border-t border-gray-500/20"></div><span className="flex-shrink-0 mx-4 text-gray-500 text-xs uppercase">or</span><div className="flex-grow border-t border-gray-500/20"></div></div>
                   <button onClick={() => setAuthMode('email-login')} className={`w-full py-3.5 border border-gray-500/30 hover:bg-gray-500/10 rounded-xl font-medium text-sm flex items-center justify-center gap-3 transition-colors`}><LogIn className="h-5 w-5" /> Sign in with Email</button>
                 </div>
